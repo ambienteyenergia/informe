@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        PDF tuvieja
+    </title>
+    <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+    <style>
+      @import url(https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLUXza5VhXqVC6o75Eld_V98);
+
+      :root {
+        font-family: Calibri;
+        font-weight: 400;
+        font-size: 13px
+      }
+      @page {
+        size: A4;
+        margin-top: 25mm;
+        margin-bottom: 15mm;
+        margin-left: 12mm;
+        margin-right: 12mm;
+      }
+      @page {
+        @top-right-corner {
+          content: "Página " counter(page) " de " counter(pages);
+          font-size: 12px;
+          text-align: left;
+          right: 12mm;
+          top:12mm;
+          position: absolute;
+          }
+      }
+      @page {             
+        @top-center {
+            content: element(topcenterrunning);
+            text-align: right;
+            font-size: 11px;
+            position: absolute;
+            right: 32mm;
+            top: 10mm;
+            padding-right: 8px;
+            padding-top: 12px;
+            height:40px;
+            border-right: 2px solid rgb(118, 118, 118);
+          }
+      }
+      @page {
+          @top-left-corner {
+            content: element(logorunning);
+            position: absolute;
+        }
+      }
+
+      .logo {
+        position: running(logorunning);
+        height: 20mm;
+        width: 210mm;        
+      }
+      .separadorverde {
+        background: #A8CF45;
+        width:190mm;
+        height: 2px;
+        margin: auto;
+        border-radius: 2px;
+        margin-top: 3mm;
+        
+      }
+     
+      .logoimg {
+        height: 11mm;
+        margin-right: 157mm;
+        margin-top: 5mm;
+        margin-bottom: 1.5mm;
+      }
+      
+      .topcenter {
+        position: running(topcenterrunning);    
+      }
+      h1 {
+        text-align: center;
+        font-size: 20px;
+      }
+      h3 {
+        text-align: center;
+        background-color: rgb(206, 205, 205);
+        padding: 3px;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 3px 3px 0 0;
+      }
+      h4 {
+        text-align: center;
+        background-color: rgb(206, 205, 205);
+        padding: 3px;
+        margin-top: 0;
+        margin-bottom: 0;
+        border-radius: 3px 3px 0 0;  
+        position: absolute;
+        width: 100%;      
+      }
+      .caja-resultados {
+        border: 2px solid gainsboro;
+        border-radius: 5px;
+      }
+      .tabla-resultados {
+        width: 100%;
+        text-align: center;
+      }
+      .encabezado-tabla {
+        background-color: gainsboro;
+        height: 25px;
+      }
+
+      .c1 {
+        width: 7cm;
+      }
+      td {
+        border-bottom: 1px dashed gainsboro;
+      }
+      td.c1 {
+        text-align: left;
+      }
+      .datos-punto {
+        margin: 0;
+        padding-left: 2px;
+        padding-top: 2px;
+        padding-bottom: 0;
+      }
+      tbody > tr:nth-of-type(2n) {
+        background-color: gainsboro;
+      }
+      .contenedor-fotos {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .caja-foto {
+        border: 2px solid gainsboro;
+        border-radius: 5px;
+        margin: auto;
+        margin-bottom: 20px;
+        position: relative;
+      }
+      .foto {
+        height: 70mm;
+      }
+
+
+    </style>
+    <header class="logo">
+    <img class="logoimg" src="http://ambienteyenergia.github.io/informe/logo.jpg">
+    <div class="separadorverde"></div>
+    </header>
+    <div class="topcenter">
+      <div>Fecha de emisión de informe: 10/12/1984</div>
+      <div>Informe: 4552-INF AyE-Efluente Industrial-aaaaaaaaaaaaaaaaaaaaaSan tana Textil Chaco SA (Santana Textil Chaco)</div>
+    </div>
+</head>
+
+<body>
+  <h1>Informe de Muestreo Ambiental - Efluente Industrial</h1>
+  <section id="solicitante">
+    <b>Solicitante: </b> <span>&lt;&lt;[Cliente].[Razón Social]&gt;&gt; (CUIT: &lt;&lt;[Cliente].[CUIT]&gt;&gt;</span><br>
+    <b>Establecimiento: </b><span>Planta 2</span><br>
+    <b>Dirección: </b><span>Ruta 16 - km. 24,5, Puerto Tirol, Chaco (CP: 3505)</span><br>
+  </section>
+  <section id="datos-muestreo">
+    <h2>Datos del muestreo</h2>
+    <b>Fecha de muestreo: </b><span> &lt;&lt;[fecha texto]&gt;&gt;</span><br>
+    <b>Cadena de custodia: </b><span> CC00000</span><br>
+    <b>Metodología de muestreo: </b><span> &lt;&lt;[Metodologia de muestreo]&gt;&gt;
+    </span><br>
+    
+  </section>
+
+  <section id="resultados">
+    <h2>Resultados</h2>
+    <div class="caja-resultados">
+      <h3>Punto 1 - Planta de tratamiento</h3>
+      <div class="datos-punto">
+        <span>Coordenadas: 32° 29' 19" S, 61° 34' 18" O</span><br>
+        <span>Hora de muestreo: 13:08 h</span>
+      </div>
+        <table class="tabla-resultados">
+          <thead>
+            <tr class="encabezado-tabla">
+              <th class="c1">Parámetro</th>
+              <th class="c2">Unidad</th>
+              <th class="c3">LD</th>
+              <th class="c4">Resultado</th>
+              <th class="c5">Límite*</th>
+              <th class="c6">Técnica</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="c1">Arsénico</td>
+              <td>mg/L</td>
+              <td>0,01</td>
+              <td></td>
+              <td></td>
+              <td>SM 3500-As C</td>
+            </tr>
+            <tr>
+              <td class="c1">Arsénico</td>
+              <td>mg/L</td>
+              <td>0,01</td>
+              <td></td>
+              <td>0,5</td>
+              <td>SM 3500-As C</td>
+            </tr>
+            <tr>
+              <td class="c1">Arsénico</td>
+              <td>mg/L</td>
+              <td>0,01</td>
+              <td></td>
+              <td>0,5</td>
+              <td>SM 3500-As C</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </section>
+  <section class="registro-fotografico">
+  <h2>Registro fotográfico</h2>
+  <div class="contenedor-fotos">
+    <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+    <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+        <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+        <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+        <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+    
+        <div class="caja-foto">
+      <h4>Punto x - Cámara de aforo</h4>
+      <img src="imagenes/foto.jpg" class="foto">
+    </div>
+    
+
+  </div>
+  </section>
+
+   
+
+</body>
+
+</html>
