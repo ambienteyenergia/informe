@@ -1,0 +1,204 @@
+@import url(https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLUXza5VhXqVC6o75Eld_V98);
+:root {
+    font-family: Calibri;
+    font-weight: 300;
+    font-size: 11px;
+    }
+@page {
+    size: A4;
+    margin-top: 25mm;
+    margin-bottom: 15mm;
+    margin-left: 12mm;
+    margin-right: 12mm;
+    }
+@page {
+@top-right-corner {
+    content: "Página " counter(page) " de " counter(pages);
+    font-size: 11px;
+    text-align: left;
+    width:fit-content;
+    left: 180mm;
+    top:15mm;
+    position: absolute;
+    }
+}
+@page {             
+    @top-center {
+        content: element(topcenterrunning);
+        text-align: right;
+        font-size: 11px;
+        position: absolute;
+        right: 32mm;
+        top: 10mm;
+        padding-right: 8px;
+        padding-top: 12px;
+        height:40px;
+        }
+    }
+@page {
+    @top-left-corner {
+        content: element(logorunning);
+        position: absolute;
+    }
+}
+.logo {
+    position: running(logorunning);
+    height: 20mm;
+    width: 210mm;        
+}
+.separadorverde {
+    background: #A8CF45;
+    width:185mm;
+    height: 2px;
+    margin: auto;
+    border-radius: 2px;
+    margin-top: 1mm;
+    
+}
+.logoimg {
+    height: 11mm;
+    margin-right: 157mm;
+    margin-top: 8mm;
+    margin-bottom: 1.2mm;
+}
+.topcenter {
+    position: running(topcenterrunning);    
+}
+h1 {
+    text-align: center;
+    font-size: 17px;
+}
+h2 {
+    font-size: 14px;
+}
+h3 {
+    text-align: center;
+    font-size: 11px;
+    background-color: rgb(206, 205, 205);
+    padding: 3px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 3px 3px 0 0;
+}
+h4 {
+    text-align: center;
+    font-size: 11px;
+    background-color: #ddd9;
+    padding: 3px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 2px 2px 0 0;  
+    position: absolute;
+    width: 100%;      
+}
+.caja-resultados {
+    font-size: 11px;
+    width: 100%;
+    margin: auto;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+.tabla-resultados {
+    width: 100%;
+    text-align: center;
+}
+.encabezado-tabla {
+    background-color: #ddd;dcdcdc
+    height: 25px;
+}
+
+.th_analito {
+    text-align: center;
+}
+.td_analito {
+    text-align: left;
+    padding-left: 5px;
+}
+.th_unidad {
+    width: 14mm;
+}
+.th_ld {
+    width: 12mm;
+}
+.th_resultado {
+    width: 20mm;
+
+}
+.th_limite1 {
+    width: 13mm;
+
+}
+.th_limite2 {
+    width: 13mm;
+
+}
+.th_tecnica {
+    width: 30mm;
+
+}
+.datos-punto {
+    font-size: 10px;
+    font-weight: 300;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 0;
+}
+tbody > tr:nth-of-type(2n) {
+
+    background-color: #f5f5f5;
+}
+td {
+    margin: 0;
+    border-top: 1px dashed #ddd;
+    border-bottom: 1px dashed #ddd;
+}
+.contenedor-fotos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.caja-foto {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+
+}
+.foto {
+    max-height:65mm;
+    max-width: 65mm;
+    display: block;
+    border-radius: 3px;
+}
+.contenedor-mapa {
+    width: 500px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+}
+.apimap {
+    width: 100%;
+    height: 480px;
+    border-radius: 3px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+.img-norte {
+    height: 35px;
+    width: 35px;
+    border-radius: 30%;
+    object-fit: contain;
+    object-position: center;
+    padding:6px;
+    position: absolute;
+    top:10px;
+    right: 10px;
+    filter: drop-shadow(0 0 3px #fff);
+    z-index: 50;
+    background-color: #fff9;
+}
