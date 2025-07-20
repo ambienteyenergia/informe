@@ -1,46 +1,10 @@
 @import url(https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLUXza5VhXqVC6o75Eld_V98);
-:root {
+body {
     font-family: Calibri;
     font-weight: 300;
     font-size: 11px;
     }
-@page {
-    size: A4;
-    margin-top: 25mm;
-    margin-bottom: 15mm;
-    margin-left: 12mm;
-    margin-right: 12mm;
-    }
-@page {
-@top-right-corner {
-    content: "Página " counter(page) " de " counter(pages);
-    font-size: 11px;
-    text-align: left;
-    width:fit-content;
-    left: 180mm;
-    top:15mm;
-    position: absolute;
-    }
-}
-@page {             
-    @top-center {
-        content: element(topcenterrunning);
-        text-align: right;
-        font-size: 11px;
-        position: absolute;
-        right: 32mm;
-        top: 10mm;
-        padding-right: 8px;
-        padding-top: 12px;
-        height:40px;
-        }
-    }
-@page {
-    @top-left-corner {
-        content: element(logorunning);
-        position: absolute;
-    }
-}
+
 .logo {
     position: running(logorunning);
     height: 20mm;
