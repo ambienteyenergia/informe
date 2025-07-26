@@ -1,176 +1,672 @@
-<!DOCTYPE html>
+<html>
 <head>
     <meta charset="UTF-8">
     <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
-    <link rel="stylesheet" type="text/css" href="ml_style.css">
-    <link rel="icon" href="imagenes/isologo65x65.png" type="image/png">
-    <title>ML informe</title>
+    <link rel="icon" href="http://ambienteyenergia.github.io/informe/isologo65x65.png" type="image/png">
+
+    <!-- NOMBRE DEL ARCHIVO -->
+    <title>&lt;&lt;[Nombre de archivo]&gt;&gt;</title>
+
+    <!-- HOJA DE ESTILOS (NO FUNCIONA CON ENLACE EXTERNO) -->
+<style type="text/css">
+/*IMPORTAR FUENTES DE GOOGLE (para usar calibri)*/
+@import url(https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLUXza5VhXqVC6o75Eld_V98);
+
+/*CONFIGURACION DE PAGINA Y ENCABEZADO*/
+@page {
+    size: A4;
+    margin-top: 25mm;
+    margin-bottom: 18mm;
+    margin-left: 16mm;
+    margin-right: 13mm;
+}
+@page {
+    @top-right-corner {
+        content: "Página " counter(page) " de " counter(pages);
+        font-size: 11px;
+        text-align: left;
+        color: #444;
+        width: fit-content;
+        left: 178mm;
+        top: 15mm;
+        position: absolute;
+    }
+}
+@page {
+    @top-center {
+        content: element(topcenterrunning);
+        text-align: right;
+        font-size: 11px;
+        color: #444;
+        position: absolute;
+        right: 32mm;
+        top: 10mm;
+        padding-right: 8px;
+        padding-top: 12px;
+        height: 40px;
+    }
+}
+@page {
+    @top-left-corner {
+        content: element(logorunning);
+        position: absolute;
+    }
+}
+@page {
+    @bottom-left-corner {
+        content: element(pieizqrunning);
+        position: absolute;
+        margin-left: 12.5mm;
+        font-size: 8px;
+        text-align: left;
+        width: fit-content;
+        bottom: 7.5mm;
+        font-family: sans-serif;
+        letter-spacing: 0.06em;
+    }
+}
+@page {
+    @bottom-right-corner {
+        content: element(piederrunning);
+        position: absolute;
+        right: 13.5mm;
+        bottom: 7.5mm;
+        font-size: 8px;
+        text-align: right;
+        width: fit-content;
+        font-family: sans-serif;
+        letter-spacing: 0.06em;
+    }
+}
+.page-break {
+  break-before: page; /* usar <div class="page-break"></div> */
+}
+/*ESTILO GENEARL*/
+body {
+    font-family: Calibri;
+    font-weight: 300;
+    font-size: 11px;
+    }
+
+b {
+    font-weight:600;
+}
+/*ESTILO DE LOS ELEMENTOS EN ENCABEZADO */
+.logo {
+    position: running(logorunning);
+    height: 20mm;
+    width: 210mm;
+}
+.separadorverde {
+    background: #A8CF45;
+    width: 185mm;
+    height: 2px;
+    margin: auto;
+    border-radius: 2px;
+    margin-top: 1mm;
+}
+.logoimg {
+    height: 11mm;
+    margin-right: 157mm;
+    margin-top: 8mm;
+    margin-bottom: 1.2mm;
+}
+.topcenter {
+    position: running(topcenterrunning);
+}
+.pieizq {
+    position: running(pieizqrunning);
+}
+.textopieizq {
+    margin-top: 5px;
+    margin-left: 3px;
+    color: #444;
+}
+.pieder {
+    position: running(piederrunning);
+    color: #444;
+}
+/*HOJA DE ESTILOS */
+
+.oculto {/*elementos ocultos para las funciones*/
+    display: none;
+}
+h1 { /*PRIMER TITULO (INFORME DE MONITOREO AMBIENTAL...*/
+    text-align: center;
+    font-size: 17px;
+}
+
+h2 { /*TITULO DE SECCIONES (ej. Datos de muestreo, Resultados...)*/
+    font-size: 14px;
+    break-after: avoid;
+}
+
+.certificados h2 {
+  flex-basis: 100%;
+}
+
+h3 { /*TITULO DE LA TABLA DE RESULTADOS*/
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 10px;
+    padding: 3px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-radius: 3px 3px 0 0;
+}
+
+/* RESULTADOS */
+.bloque-resultados {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+.caja-resultados {
+    font-size: 11px;
+    width: 100%;
+    margin: auto;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    break-after: avoid;
+}
+.tabla-resultados {
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+    break-after: avoid;
+}
+
+.caja-instrumental {
+    font-size: 11px;
+    width: 90%;
+    margin: auto;
+    border-radius: 5px;
+}
+.tabla-instrumental {
+    font-size: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.tabla-instrumental th {
+    font-size: 10px;
+}
+.encabezado-tabla {
+    background-color: #ddd;
+}
+.encabezado-tabla-instrumental {
+    font-weight: 100;
+    border-bottom: 1px solid #000;
+}
+.th_analito {
+    text-align: left;
+    padding-left: 5px;
+    font-weight: 400;
+}
+.th_denominacion {
+    text-align: left;
+    padding-left: 5px;
+    font-weight: 400;
+}
+.td_analito {
+    text-align: left;
+    padding-left: 5px;
+}
+.th_unidad {
+    font-weight: 400;
+}
+.td_unidad {
+    width: 30mm;
+}
+.th_ld {
+    font-weight: 400;
+}
+.td_ld {
+    width: 10mm;
+}
+.th_resultado {
+    font-weight: 400;
+}
+.td_resultado {
+    width: 20mm;
+}
+.th_limite1 {
+    font-weight: 400;
+}
+.td_limite1 {
+    width: 13mm;
+}
+.th_limite2 {
+    font-weight: 400;
+}
+.td_limite2 {
+    width: 13mm;
+}
+.th_tecnica {
+    font-weight: 400;
+}
+.td_tecnica {
+    width: 30mm;
+}
+.td_resultado {
+    font-weight: 600;
+}
+.datos-punto {
+    font-size: 10px;
+    font-weight: 100;
+    margin: 0;
+    padding-left: 5px;
+    padding-top: 2px;
+    padding-bottom: 0;
+    border-top: 1px solid #ddd;
+    break-after: avoid;
+}
+.fila:nth-of-type(2n) { /*ALTERNA UN FONDO GRIS CLARITO A CADA 2 FILAS DE LA TABLA*/
+    background-color: #f5f5f5;
+}
+.tabla-resultados td {  /*FILAS GENERALES DE LAS TABLAS*/
+    margin: 0;
+    border-bottom: 1px dashed #ddd;
+}
+table {
+    border-collapse: collapse;
+}
+.definiciones {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+    padding-top: 2px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    break-after: avoid;
+    break-before: avoid;
+}
+.limites {
+    margin-bottom: 25px;
+    padding-left: 10px;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-after: avoid;
+    break-before: avoid;
+}
+.firma-sobrepuesta {
+    position: absolute;
+    height: 30mm;
+    right: 200px;
+    bottom: 1px;
+    z-index: 1000;
+    opacity: 0.9;
+}
+.instrumental {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+/* REGISTRO FOTOGRAFICO */
+.contenedor-fotos {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap:wrap ;
+    width: 181mm;
+}
+
+.contenedor-fotos h2 {
+    width: 100%;
+    margin-bottom: 0;
+}
+.caja-foto {
+    position: relative;
+    margin-top: 5mm;
+    margin-right: auto;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden; /* asegura que el borde encierre el contenido */
+    box-shadow: 0 1px 10px #0001; /* opcional: agrega profundidad */
+}
+.foto {
+    max-height: 70mm;
+    max-width: 70mm;
+    display: block;
+}
+.titulo-foto {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 3px;
+    text-align: center;
+    font-size: 8px;
+    text-transform: uppercase;
+    font-weight: 200;
+    background-color: #ffffffcc;
+}
+/* UBICACION DE LOS PUNTOS */
+.ubicacion h2 {
+    margin-top: 5mm;
+}
+.contenedor-mapa {
+    width: 500px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    position: relative;
+}
+.apimap {
+    width: 100%;
+    height: 480px;
+    border-radius: 3px;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+.img-norte {
+    height: 35px;
+    width: 35px;
+    border-radius: 30%;
+    object-fit: contain;
+    object-position: center;
+    padding: 6px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    filter: drop-shadow(0 0 3px #fff);
+    z-index: 50;
+    background-color: #fff9;
+}
+.bloque-certificados {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+/* Estilo del título */
+.bloque-certificados h2 {
+    font-size: 14px;
+    text-align: center;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+/* Contenedor de las imágenes */
+.contenedor_certificado {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    
+}
+/* Estilo individual de cada imagen */
+.img_certificado {
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    max-width: 100%; /* o max-width: 100% si querés responsive */
+    object-fit: contain;
+    box-shadow: 3px 3px 8px #ccc;
+}
+</style>
+    <!-- ELEMENTOS DEL ENCABEZADO -->
     <header class="logo">
         <img class="logoimg" src="http://ambienteyenergia.github.io/informe/logo.jpg">
         <div class="separadorverde"></div>
     </header>
     <div class="topcenter">
-        <div>Fecha de emisión de informe: 10/12/1984</div>
-        <div>Informe: 4552-INF AyE-Efluente Industrial-San tana Textil Chaco SA (Santana Textil
-            Chaco)</div>
+        <div>Fecha de emisión de informe: &lt;&lt;text([INF_FECHA],"dd/mm/yyyy")&gt;&gt;</div>
+        <div>Informe: &lt;&lt;[Nombre de archivo]&gt;&gt;</div>
     </div>
+    <div class="pieizq">
+        <div class="separadorverde"></div>
+        <div class="textopieizq">
+            <span>Ambiente y Energía</span><br>
+            <span>Laboratorio Ambiental</span>
+        </div>
+
+    </div>
+
+    <div class="pieder">
+        <span>Lazarte 1609 Rosario, Santa Fe - Télefono: 0341-6097956</span><br>
+        <span>info@ambienteyenergia.net - www.ambienteyenergia.net</span>
+    </div>
+
 </head>
+
+<!-- INFORME -->
 <body>
-    <h1>Informe de Muestreo Ambiental - Efluente Industrial</h1>
+
+    <h1>Informe de Muestreo Ambiental - &lt;&lt;[Parámetros]&gt;&gt;</h1>
+    
     <section id="solicitante">
-        <b>Solicitante: </b> <span>&lt;&lt;[Cliente].[Razón Social]&gt;&gt; (CUIT:
-            &lt;&lt;[Cliente].[CUIT]&gt;&gt;</span><br>
-        <b>Establecimiento: </b><span>Planta 2</span><br>
-        <b>Dirección: </b><span>Ruta 16 - km. 24,5, Puerto Tirol, Chaco (CP: 3505)</span><br>
+        <b>Solicitante: </b>
+        <span>&lt;&lt;[Cliente].[Razón Social]&gt;&gt;</span>
+        <p class="oculto">&lt;&lt;IF: isnotblank([Cliente].[CUIT])&gt;&gt;</p>
+        <span> (CUIT: &lt;&lt;[Cliente].[CUIT]&gt;&gt;)</span>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+        <br>
+        <b>Establecimiento: </b><span>&lt;&lt;[Establecimiento].[Nombre Establecimiento]&gt;&gt;</span><br>
+        <b>Dirección: </b>
+        <span>&lt;&lt;[Establecimiento].[Dirección]&gt;&gt;, &lt;&lt;[Establecimiento].[Localidad]&gt;&gt;, &lt;&lt;[Establecimiento].[Provincia]&gt;&gt;</span>
+        <p class="oculto">&lt;&lt;IF: isnotblank([Establecimiento].[Código Postal])&gt;&gt;</p>
+        <span> (CP: &lt;&lt;[Establecimiento].[Código Postal]&gt;&gt;)</span>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
     </section>
+
     <section id="datos-muestreo">
         <h2>Datos del muestreo</h2>
         <b>Fecha de muestreo: </b><span> &lt;&lt;[fecha texto]&gt;&gt;</span><br>
-        <b>Cadena de custodia: </b><span> CC00000</span><br>
-        <b>Metodología de muestreo: </b><span> &lt;&lt;[Metodologia de muestreo]&gt;&gt;
-        </span><br>
+
+        <p class="oculto">&lt;&lt;IF: isnotblank([CC_ID].[RECEPCION_FECHA])&gt;&gt;</p>
+        <b>Fecha de recepción de &lt;&lt;if(count([Related ML Puntos])>1,"las muestras","la muestra")&gt;&gt; :</b>
+        <span>&lt;&lt;concatenate(text([CC_ID].[RECEPCION_FECHA],"d")," de ",text([CC_ID].[RECEPCION_FECHA],"MMMM")," de ",text([CC_ID].[RECEPCION_FECHA],"YYYY"))&gt;&gt;</span><br>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        <p class="oculto">&lt;&lt;If: isnotblank([CC_ID])&gt;&gt;</p>
+        <b>Cadena de custodia: </b><span>&lt;&lt;[CC_ID].[CC CODIGO]&gt;&gt;</span><br>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        <b>Metodología de muestreo: </b><span> &lt;&lt;[Metodologia de muestreo]&gt;&gt;</span><br>
+    
     </section>
+
     <section id="resultados">
+
         <h2>Resultados</h2>
+
+        <p class="oculto">&lt;&lt;Start: orderby([Related ML puntos],[punto],false)&gt;&gt;</p>
+
+        <p class="oculto">&lt;&lt;IF: [AUX4]=true&gt;&gt;</p>
+        <div class="page-break"></div>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        
         <div class="caja-resultados">
-            <h3>Punto 1 - Planta de tratamiento</h3>
-            <div class="datos-punto">
-                <span>Coordenadas: 32° 29' 19" S, 61° 34' 18" O</span><br>
-                <span>Hora de muestreo: 13:08 h</span>
-            </div>
             <table class="tabla-resultados">
                 <thead>
+                    <tr>
+                        <th class="th_punto" style="text-align: center;" colspan="999"><h3>&lt;&lt;[Punto de medición]&gt;&gt;</h3></th>
+                    </tr>
                     <tr class="encabezado-tabla">
                         <th class="th_analito">Parámetro</th>
                         <th class="th_unidad">Unidad</th>
                         <th class="th_ld">LD</th>
                         <th class="th_resultado">Resultado</th>
+                        
+                        <p class="oculto">&lt;&lt;IF: isnotblank([AUX1])&gt;&gt;</p>
                         <th class="th_limite1">Límite*</th>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
+                        
+                        <p class="oculto">&lt;&lt;IF: isnotblank([AUX3])&gt;&gt;</p>                        
                         <th class="th_limite2">Límite**</th>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
+                        
+                        <p class="oculto">&lt;&lt;IF: not([INF_TIPO]="SIN TECNICA")&gt;&gt;</p>
                         <th class="th_tecnica">Técnica</th>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,001</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
+                    <p class="oculto">&lt;&lt;Start: OrderBy([Related ML Analitos],[index],false)&gt;&gt;</p>
+                    <tr class="fila">
+                        <td class="td_analito">&lt;&lt;[ANALITO]&gt;&gt;</td>
+                        <td class="td_unidad">&lt;&lt;[UNIDAD]&gt;&gt;</td>
+                        <td class="td_ld">&lt;&lt;[LD]&gt;&gt;</td>
+                        <td class="td_resultado">&lt;&lt;[Resultado texto]&gt;&gt;</td>
+
+                        <p class="oculto">&lt;&lt;IF: isnotblank([ML Punto].[AUX1])&gt;&gt;</p>
+                        <td class="td_limite1">&lt;&lt;[LIMITE]&gt;&gt;</td>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
+
+                        <p class="oculto">&lt;&lt;IF: isnotblank([ML Punto].[AUX3])&gt;&gt;</p>
+                        <td class="td_limite2">&lt;&lt;[LIMITE 2]&gt;&gt;</td>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
+
+                        <p class="oculto">&lt;&lt;IF: not([INF_TIPO]="SIN TECNICA")&gt;&gt;</p>
+                        <td class="td_tecnica">&lt;&lt;[TECNICA]&gt;&gt;</td>
+                        <p class="oculto">&lt;&lt;endif&gt;&gt;</p>
                     </tr>
+                    <p class="oculto">&lt;&lt;end&gt;&gt;</p>
+                </tbody>
+            </table>
+            <div class="datos-punto">
+
+                <p class="oculto">&lt;&lt;IF: isnotblank([coordenadas])&gt;&gt;</p>
+                <span>Coordenadas: &lt;&lt;[Coord GMS]&gt;&gt;</span><br>
+                <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+                <p class="oculto">&lt;&lt;IF: isnotblank([h i])&gt;&gt;</p>
+                <span>Hora de muestreo: &lt;&lt;[h i]&gt;&gt;</span><br>
+                <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+                <p class="oculto">&lt;&lt;IF: isnotblank([Profundidad])&gt;&gt;</p>
+                <span>Profundidad de la muestra: </span>
+                <span>&lt;&lt;if([Profundidad]=0, "Superficial", substitute([Profundidad],".",","))&gt;&gt; m</span><br>
+                <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+            </div>
+            
+        </div>
+        <div class="definiciones">
+            <span>LD: Límite de detección</span><br>
+
+            <p class="oculto">&lt;&lt;IF: [hay ND]=true&gt;&gt;</p>
+            <span>ND: No detectado</span><br>
+            <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        </div>
+        <div class="limites">
+            <p class="oculto">&lt;&lt;IF: isnotblank([LIMITE ref])&gt;&gt;</p>
+            <span>* &lt;&lt;[LIMITE ref]&gt;&gt;</span><br>
+            <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+            <p class="oculto">&lt;&lt;IF: isnotblank([LIMITE ref2])&gt;&gt;</p>
+            <span>** &lt;&lt;[LIMITE ref2]&gt;&gt;</span><br>
+            <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>  
+            
+            <p class="oculto">&lt;&lt;if: isnotblank([CONCLUSION])&gt;&gt;</p>
+            <br>
+            <b>Conclusión: </b><span>&lt;&lt;[CONCLUSION]&gt;&gt;</span><br>
+            <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+        </div>
+        
+
+        <p class="oculto">&lt;&lt;end&gt;&gt;</p>
+
+        <div>
+            <img src="http://ambienteyenergia.github.io/informe/firmaDT.png" alt="Firma" class="firma-sobrepuesta">
+        </div>
+    </section>
+
+    <p class="oculto">&lt;&lt;if: isnotblank([Related OBSERVACIONESs])&gt;&gt;</p>
+    <section class="observaciones">
+        <p class="oculto">&lt;&lt;Start: [Related OBSERVACIONESs]&gt;&gt;</p>
+
+        <p class="oculto">&lt;&lt;IF:and([OBSERVACIONES]=true,isblank([TITULO]))&gt;&gt;</p>
+        <h2>Observaciones</h2>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        <p class="oculto">&lt;&lt;IF:isnotblank([TITULO])&gt;&gt;</p>
+        <h2>&lt;&lt;[TITULO]&gt;&gt;</h2>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>  
+        
+        <p class="oculto">&lt;&lt;if:isnotblank([text])&gt;&gt;</p>
+        <span>&lt;&lt;[text]&gt;&gt;</span>
+        <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+        <p class="oculto">&lt;&lt;end&gt;&gt;</p>
+    </section>
+    <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+    <p class="oculto">&lt;&lt;if: isnotblank([Related ML Instrumentals])&gt;&gt;</p>
+    <section class="instrumental">
+        <h2>Instrumental utilizado</h2>
+
+        <div class="caja-instrumental">
+            <table class="tabla-instrumental">    
+                <thead class="encabezado-tabla-instrumental">
                     <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,001</td>
-                        <td></td>
-                        <td>0,005</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
+                        <th class="th_denominacion">Denomiación</th>
+                        <th>Marca</th>
+                        <th>modelo</th>
+                        <th>Nº de serie</th>
                     </tr>
+                </thead>
+                <tbody>
+                    <p class="oculto">&lt;&lt;start: [Related ML Instrumentals]&gt;&gt;</p>
                     <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
+                        <td class="th_denominacion">&lt;&lt;[Denominacion]&gt;&gt;</td>
+                        <td>&lt;&lt;[marca]&gt;&gt;</td>
+                        <td>&lt;&lt;[modelo]&gt;&gt;</td>
+                        <td>&lt;&lt;[NS]&gt;&gt;</td>
                     </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
-                    <tr>
-                        <td class="td_analito">Arsénico</td>
-                        <td>mg/L</td>
-                        <td>0,01</td>
-                        <td></td>
-                        <td>0,5</td>
-                        <td></td>
-                        <td>SM 3500-As C</td>
-                    </tr>
+                    <p class="oculto">&lt;&lt;end&gt;&gt;</p>
                 </tbody>
             </table>
         </div>
     </section>
+    <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+
+    <p class="oculto">&lt;&lt;IF: [INF_FOTO]=true&gt;&gt;</p>    
     <section class="registro-fotografico">
-        <h2>Registro fotográfico</h2>
+
         <div class="contenedor-fotos">
+
+            <h2>Registro fotográfico</h2>
+            
+            <p class="oculto">&lt;&lt;Start:orderby(SELECT(ML puntos[ID],and([ML Planilla]=[_THISROW].[id],ISNOTBLANK([Foto]))),[punto],false)&gt;&gt;</p>
             <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
+                <div class="titulo-foto">&lt;&lt;[Punto de medición]&gt;&gt;</div>
+                <img src="&lt;&lt;[URL Foto]&gt;&gt;" class="foto">               
             </div>
-            <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
-            </div>
-            <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
-            </div>
-            <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
-            </div>
-            <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
-            </div>
-            <div class="caja-foto">
-                <h4>Punto x - Cámara de aforo</h4>
-                <img src="imagenes/foto.jpg" class="foto">
-            </div>
+            <p class="oculto">&lt;&lt;end&gt;&gt;</p>
+
         </div>
     </section>
+     <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+    <p class="oculto">&lt;&lt;IF: [INF_MAPA]=true&gt;&gt;</p>
     <section class="ubicacion">
         <h2>Ubicación de los puntos de monitoreo</h2>
+
         <div class="contenedor-mapa">
-            <img src="imagenes/staticmap.png" class="apimap">
-            <img src="imagenes/NORTE.png" class="img-norte">
+
+            <img src="&lt;&lt;text([api map])&gt;&gt;" class="apimap">
+
+            <img src="http://ambienteyenergia.github.io/informe/NORTE.png" class="img-norte">
         </div>
     </section>
+    <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
+    <p class="oculto">&lt;&lt;IF: (and([INF_CERTIF]=true,isnotblank([CALIBRACIONES JPG])))&gt;&gt;</p>
+    <section class="bloque-certificados">
+        <h2>Certificados de calibración</h2>
+        <p class="oculto">&lt;&lt;Start: [Related ML CERTIFICADOSs]&gt;&gt;</p>
+
+        <div class="contenedor_certificado">
+            <img src="&lt;&lt;[URL certificado]&gt;&gt;" alt="Certificado" class="img_certificado">            
+        </div>
+
+        <p class="oculto">&lt;&lt;End&gt;&gt;</p>
+</section>
+    <p class="oculto">&lt;&lt;endIF&gt;&gt;</p>
+
 </body>
 </html>
